@@ -4,11 +4,13 @@
     <span class="pull-right">
       <% if current_user && current_user.has_collected?(@movie) %>
         <label class="label label-success"> 已经收藏 </label>
+        <%= link_to("Unfavorite", unfavorite_movie_path(@movie), method: :post, class: "btn btn-default") %>
       <% else %>
         <label class="label label-warning"> 未收藏 </label>
+        <%= link_to("Favorite", favorite_movie_path(@movie), method: :post, class: "btn btn-default") %>
       <% end %>
     </span>
-    
+
     <%= link_to("Write a Review", new_movie_review_path(@movie), class: "btn btn-default pull-right") %>
 
     <% if current_user && current_user == @movie.user %>
