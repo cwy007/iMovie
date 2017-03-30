@@ -8,6 +8,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @reviews = @movie.reviews
   end
 
   def new
@@ -39,7 +40,7 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    
+
     @movie.destroy
     redirect_to movies_path, alert: "Movie delete"
   end
