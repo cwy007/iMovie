@@ -3,6 +3,10 @@ class ReviewsController < ApplicationController
 
   def new
     @movie = Movie.find(params[:movie_id])
+    if !current_user.has_collected?(@movie)
+      redirect_to movie_path(@movie)
+      flash[:warning] = "You need to favorite this movie before writing a review."
+    end
     @review = Review.new
 
   end
