@@ -29,13 +29,8 @@
       </tr>
     </thead>
     <tbody>
-      <% @reviews.each do |review| %>
-        <tr>
-          <td><%= render_review_content(review) %></td>
-          <td><%= review.user.email %></td>
-          <td><%= review.created_at %></td>
-        <tr>
-      <% end %>
+      
+      <%= render :partial => "review_item", :collection => @reviews, :as => :review %>
     </tbody>
   </table>
 
