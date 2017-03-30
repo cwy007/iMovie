@@ -1,6 +1,7 @@
 <div class="col-md-12">
   <div class="movie">
 
+    <% if current_user %>
     <span class="pull-right">
       <% if current_user && current_user.has_collected?(@movie) %>
         <label class="label label-success"> 已经收藏 </label>
@@ -12,6 +13,8 @@
     </span>
 
     <%= link_to("Write a Review", new_movie_review_path(@movie), class: "btn btn-default pull-right") %>
+    <% end %>
+
 
     <% if current_user && current_user == @movie.user %>
       <%= link_to("Edit", edit_movie_path(@movie), class: "btn btn-primary pull-right") %>
@@ -29,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      
+
       <%= render :partial => "review_item", :collection => @reviews, :as => :review %>
     </tbody>
   </table>
