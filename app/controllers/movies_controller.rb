@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
   before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order("created_at DESC").paginate( :page => params[:page], :per_page => 20)
   end
 
   def show
@@ -24,6 +24,7 @@ class MoviesController < ApplicationController
     @movie.user = current_user
 
     if @movie.save
+      current_user.favorite!(@movie)
       redirect_to movies_path, notice: "Movie create successfully!"
     else
       render :new
