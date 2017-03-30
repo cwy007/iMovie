@@ -12,4 +12,13 @@ class User < ApplicationRecord
   def has_collected?(movie)
     favorited_movies.include?(movie)
   end
+
+  def favorite!(movie)
+    favorited_movies << movie
+  end
+
+  def unfavorite!(movie)
+    favorited_movies.delete(movie)
+  end
+  
 end
