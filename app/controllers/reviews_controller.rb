@@ -8,7 +8,11 @@ class ReviewsController < ApplicationController
       flash[:warning] = "You need to favorite this movie before writing a review."
     end
     @review = Review.new
+  end
 
+  def edit
+    @movie = Movie.find(params[:movie_id])
+    @review = Review.find(params[:id])
   end
 
   def create
@@ -22,6 +26,23 @@ class ReviewsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def update
+    @movie = Movie.find(params[:movie_id])
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      redirect_to account_reviews_path, notice: "Update successfully"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @movie = Movie.find(params[:movie_id])
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to account_reviews_path, alert: "Review deleted"
   end
 
   private
