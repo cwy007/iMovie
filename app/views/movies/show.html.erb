@@ -1,5 +1,14 @@
 <div class="col-md-12">
   <div class="movie">
+
+    <span class="pull-right">
+      <% if current_user && current_user.has_collected?(@movie) %>
+        <label class="label label-success"> 已经收藏 </label>
+      <% else %>
+        <label class="label label-warning"> 未收藏 </label>
+      <% end %>
+    </span>
+    
     <%= link_to("Write a Review", new_movie_review_path(@movie), class: "btn btn-default pull-right") %>
 
     <% if current_user && current_user == @movie.user %>
